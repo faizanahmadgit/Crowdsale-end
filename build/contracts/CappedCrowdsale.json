@@ -177,7 +177,7 @@
         "id": 251,
         "nodeType": "ImportDirective",
         "scope": 311,
-        "sourceUnit": 465,
+        "sourceUnit": 552,
         "src": "26:33:2",
         "symbolAliases": [],
         "unitAlias": ""
@@ -235,10 +235,10 @@
               "id": 255,
               "name": "SafeMath",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 464,
+              "referencedDeclaration": 551,
               "src": "227:8:2",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_SafeMath_$464",
+                "typeIdentifier": "t_contract$_SafeMath_$551",
                 "typeString": "library SafeMath"
               }
             },
@@ -353,10 +353,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        1341,
-                        1342
+                        1465,
+                        1466
                       ],
-                      "referencedDeclaration": 1341,
+                      "referencedDeclaration": 1465,
                       "src": "457:7:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -650,7 +650,7 @@
                         "name": "super",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1370,
+                        "referencedDeclaration": 1494,
                         "src": "977:5:2",
                         "typeDescriptions": {
                           "typeIdentifier": "t_super$_CappedCrowdsale_$310",
@@ -748,7 +748,7 @@
                             "lValueRequested": false,
                             "memberName": "add",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 463,
+                            "referencedDeclaration": 550,
                             "src": "1043:13:2",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -802,10 +802,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        1341,
-                        1342
+                        1465,
+                        1466
                       ],
-                      "referencedDeclaration": 1341,
+                      "referencedDeclaration": 1465,
                       "src": "1035:7:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -944,7 +944,7 @@
       },
       {
         "attributes": {
-          "SourceUnit": 465,
+          "SourceUnit": 552,
           "absolutePath": "openzeppelin-solidity/contracts/math/SafeMath.sol",
           "file": "../../math/SafeMath.sol",
           "scope": 311,
@@ -1015,7 +1015,7 @@
                 "attributes": {
                   "contractScope": null,
                   "name": "SafeMath",
-                  "referencedDeclaration": 464,
+                  "referencedDeclaration": 551,
                   "type": "library SafeMath"
                 },
                 "id": 255,
@@ -1151,10 +1151,10 @@
                                 }
                               ],
                               "overloadedDeclarations": [
-                                1341,
-                                1342
+                                1465,
+                                1466
                               ],
-                              "referencedDeclaration": 1341,
+                              "referencedDeclaration": 1465,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -1548,7 +1548,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 1370,
+                                  "referencedDeclaration": 1494,
                                   "type": "contract super CappedCrowdsale",
                                   "value": "super"
                                 },
@@ -1625,10 +1625,10 @@
                                 }
                               ],
                               "overloadedDeclarations": [
-                                1341,
-                                1342
+                                1465,
+                                1466
                               ],
-                              "referencedDeclaration": 1341,
+                              "referencedDeclaration": 1465,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -1679,7 +1679,7 @@
                                       "isPure": false,
                                       "lValueRequested": false,
                                       "member_name": "add",
-                                      "referencedDeclaration": 463,
+                                      "referencedDeclaration": 550,
                                       "type": "function (uint256,uint256) pure returns (uint256)"
                                     },
                                     "children": [
@@ -1776,7 +1776,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.6",
-  "updatedAt": "2022-06-03T05:31:30.140Z",
+  "updatedAt": "2022-06-03T10:54:22.570Z",
   "devdoc": {
     "methods": {
       "buyTokens(address)": {

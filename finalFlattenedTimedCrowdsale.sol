@@ -674,18 +674,87 @@ abstract contract CappedCrowdsale is Crowdsale {
 
 }
 
-
-// File: contracts/DappTokenCrowdsale.sol
+// File: openzeppelin-solidity/contracts/crowdsale/validation/TimedCrowdsale.sol
 
 pragma solidity ^0.8.7;
 
 
-contract DappTokenCappedCrowdsale is Crowdsale, MintedCrowdsale, CappedCrowdsale {
+/**
+ * @title TimedCrowdsale
+ * @dev Crowdsale accepting contributions only within a time frame.
+ */
+abstract contract TimedCrowdsale is Crowdsale {
+  using SafeMath for uint256;
+
+  uint256 public openingTime;
+  uint256 public closingTime;
+
+  /**
+   * @dev Reverts if not in crowdsale time range.
+   */
+  modifier onlyWhileOpen {
+    // solium-disable-next-line security/no-block-members
+    require(block.timestamp >= openingTime && block.timestamp <= closingTime);
+    _;
+  }
+
+  /**
+   * @dev Constructor, takes crowdsale opening and closing times.
+   * @param _openingTime Crowdsale opening time
+   * @param _closingTime Crowdsale closing time
+   */
+  constructor(uint256 _openingTime, uint256 _closingTime) {
+    // solium-disable-next-line security/no-block-members
+    require(_openingTime >= block.timestamp);
+    require(_closingTime >= _openingTime);
+
+    openingTime = _openingTime;
+    closingTime = _closingTime;
+  }
+
+  /**
+   * @dev Checks whether the period in which the crowdsale is open has already elapsed.
+   * @return Whether crowdsale period has elapsed
+   */
+  function hasClosed() public view returns (bool) {
+    // solium-disable-next-line security/no-block-members
+    return block.timestamp > closingTime;
+  }
+
+  /**
+   * @dev Extend parent behavior requiring to be within contributing period
+   * @param _beneficiary Token purchaser
+   * @param _weiAmount Amount of wei contributed
+   */
+  function _preValidatePurchase(
+    address _beneficiary,
+    uint256 _weiAmount
+  )
+    internal
+    virtual
+    override
+    onlyWhileOpen
+  {
+    super._preValidatePurchase(_beneficiary, _weiAmount);
+  }
+
+}
+
+// File: contracts/DappTokenTimedCrowdsale.sol
+
+pragma solidity 0.8.7;
+
+
+
+
+contract DappTokenTimedCrowdsale is Crowdsale, MintedCrowdsale, CappedCrowdsale, TimedCrowdsale {
 
 uint256 public investorMinCap= 0.025 ether;
-uint256 public investorMaxCap= 2 ether;
+uint256 public investorMaxCap= 5 ether;
 mapping(address=> uint256) public contributions;
 event ContributionDone(address bene, uint256 contribe);
+uint256 public _openingTime= block.timestamp + 1 minutes ; //After 1Min of Deployment
+uint256 public _closingTime = _openingTime + 1 hours ;  // Till 1 hour after deployment
 
   constructor(
     uint256 _rate,
@@ -695,6 +764,7 @@ event ContributionDone(address bene, uint256 contribe);
   )
     Crowdsale(_rate, _wallet, _token)
     CappedCrowdsale(_cap)
+    TimedCrowdsale(_openingTime, _closingTime)
     
   {
 
@@ -710,9 +780,9 @@ event ContributionDone(address bene, uint256 contribe);
     uint256 _weiAmount
   )
     internal
-    override(Crowdsale,CappedCrowdsale)
+    override(Crowdsale,CappedCrowdsale,TimedCrowdsale)
   {
-    super._preValidatePurchase(_beneficiary, _weiAmount);
+    TimedCrowdsale._preValidatePurchase(_beneficiary, _weiAmount);
     uint256 oldContributions= contributions[_beneficiary];
     uint256 newContributions = oldContributions + (_weiAmount);
     require(newContributions >= investorMinCap && newContributions <= investorMaxCap,"Not Valid Amount of Ether");
@@ -724,9 +794,8 @@ event ContributionDone(address bene, uint256 contribe);
     uint256 _tokenAmount
   )
     internal
-    virtual
     override(Crowdsale, MintedCrowdsale)
   {
-   super._deliverTokens(_beneficiary,_tokenAmount);
+    MintedCrowdsale._deliverTokens(_beneficiary, _tokenAmount);
   }
 }
