@@ -1,3 +1,4 @@
 after 1 minute till 1 hour for ico.
 git remote ORIGINAL for timeedCrowdale
 remote Origin for Refundable crowdsale
+verify from truffle : truffle run verify contractname --network networkname
